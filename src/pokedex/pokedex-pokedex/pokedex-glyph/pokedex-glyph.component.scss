@@ -2,17 +2,36 @@
   --size: 96px;
   --offset: 30px;
   align-items: center;
-  background-color: var(--background-color, #efefef);
-  border-radius: 100%;
   display: flex;
   height: calc(var(--size) - var(--offset));
   justify-content: center;
-  overflow: hidden;
+  position: relative;
   width: calc(var(--size) - var(--offset));
 }
 
-img {
+
+button {
+  --size: 24px;
+  border: none;
+  border-radius: 100%;
+  bottom: 0;
+  cursor: pointer;
   height: var(--size);
-  display: block;
+  position: absolute;
+  outline: none;
+  right: 0;
+  text-align: center;
   width: var(--size);
+}
+
+figure {
+  align-items: inherit;
+  background-color: var(--background-color, #efefef);
+  border-radius: 100%;
+  display: inherit;
+  height: inherit;
+  justify-content: inherit;
+  margin: 0;
+  overflow: hidden;
+  width: inherit;
 }
