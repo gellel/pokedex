@@ -1,3 +1,7 @@
+@keyframes onInit {
+  from { background: red }
+  to { background: blue; }
+}
 :host {
   --size: 96px;
   --offset: 30px;
@@ -7,6 +11,8 @@
   justify-content: center;
   position: relative;
   width: calc(var(--size) - var(--offset));
+
+  /*animation: onInit 1s linear*/
 }
 
 
@@ -22,6 +28,9 @@ button {
   right: 0;
   text-align: center;
   width: var(--size);
+}
+button:hover {
+  background-color: aqua;
 }
 
 figure {

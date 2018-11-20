@@ -4,6 +4,7 @@ import { PokedexState } from '../pokedex.state';
 import { Observable } from 'rxjs';
 import { PokedexPokemon, PokedexPokemonHttp } from '../pokedex-pokemon';
 import { HttpResponse, HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { PokedexSetTo } from '@pokedex/@/actions';
 
 @Component({
   selector: 'pokedex-pokedex',
@@ -22,6 +23,7 @@ export class PokedexPokedexComponent implements OnInit {
     for (let key in response.body) {
       pokemon$[key] = response.body[key];
     };
+    console.log(pokemon$)
   };
 
   private onGetPokemonError(error: HttpErrorResponse, pokemon$: PokedexPokemon) : void {
@@ -45,5 +47,11 @@ export class PokedexPokedexComponent implements OnInit {
           });
       };
     }));
+  };
+
+  onGetMorePokemon() : void {
+    this.store.dispatch(new PokedexSetTo({
+      to: 10
+    }))
   };
 };

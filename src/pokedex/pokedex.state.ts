@@ -14,7 +14,8 @@ import {
 } from '@ngxs/store';
 
 import { 
-  PokedexGetPokedex
+  PokedexGetPokedex,
+  PokedexSetTo
 } from './@/actions';
 
 import {
@@ -60,6 +61,15 @@ export class PokedexState {
       count: payload.count,
       pokedex: payload.pokedex,
       pokemon: payload.pokemon
+    });
+  };
+
+  @Action(PokedexSetTo)
+  private onSetPokedexTo (
+      { patchState, getState }: StateContext<PokedexStateModel>, { payload }: PokedexSetTo) : void {
+    
+    patchState({
+      to: getState().to + payload.to
     });
   };
 
