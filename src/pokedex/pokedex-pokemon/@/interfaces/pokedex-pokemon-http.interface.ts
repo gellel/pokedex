@@ -1,0 +1,20 @@
+export interface PokedexPokemonHttp {
+  abilities?: object;
+  base_experience?: number;
+  height?: number;
+  id?: number;
+  is_default?: boolean;
+  forms?: object;
+  game_indices?: object;
+  held_items?: object;
+  location_area_encounters?: string;
+  moves?: object;
+  name?: string;
+  order?: number;
+  sprites?: object;
+  species?: object;
+  stats?: object;
+  types?: object;
+  url?: string;
+  weight?: number;
+};
