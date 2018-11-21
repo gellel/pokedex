@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { NgxsModule } from '@ngxs/store';
 import { PokedexPokedexComponent } from './pokedex-pokedex.component';
 import { PokedexGlyphModule } from './pokedex-glyph';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { PokedexGlyphModule } from './pokedex-glyph';
     NgxsModule.forFeature([
       
     ]),
-    PokedexGlyphModule
+    PokedexGlyphModule,
+    RouterModule
   ],
   providers: [],
   exports: [PokedexPokedexComponent]

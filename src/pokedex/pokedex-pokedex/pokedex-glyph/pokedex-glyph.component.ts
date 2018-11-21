@@ -10,7 +10,13 @@ import { PokedexPokemon, PokedexPokemonSprites } from '@pokedex/pokedex-pokemon'
   styleUrls: ['./pokedex-glyph.component.scss']
 })
 export class PokedexGlyphComponent implements OnChanges, OnInit {
+  
+  @Input()
+  id: number;
 
+  @Input()
+  name: string;
+  
   @Input()
   sprites: PokedexPokemonSprites;
 
