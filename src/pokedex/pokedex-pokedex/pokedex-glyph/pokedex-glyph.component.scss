@@ -1,6 +1,6 @@
 :host {
   --size: 96px;
-  --offset: 30px;
+  --offset: 10px;
   align-items: center;
   display: flex;
   height: calc(var(--size) - var(--offset));
@@ -34,7 +34,6 @@ button {
   text-align: center;
   transform: rotate(0deg);
   width: var(--size);
-  z-index: 2;
 
   &:hover {
     background-color: aqua;

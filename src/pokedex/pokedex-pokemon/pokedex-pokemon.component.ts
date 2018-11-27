@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Select, Store } from '@ngxs/store';
+import { PokedexState } from '@pokedex/pokedex.state';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'pokedex-pokemon',
@@ -7,9 +11,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PokedexPokemonComponent implements OnInit {
 
-  constructor() { }
+
+  constructor(private activedRoute: ActivatedRoute, private store: Store) { }
 
   ngOnInit() {
+    console.log(this.activedRoute.snapshot)
+
+    console.log(this.store.selectSnapshot(PokedexState))
   }
 
 }

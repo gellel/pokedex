@@ -20,7 +20,8 @@ import {
 
 import {
   PokedexHttpPokedex,
-  PokedexStateModel
+  PokedexStateModel,
+  PokedexMap
 } from './@/interfaces';
 
 import {
@@ -49,7 +50,7 @@ export class PokedexState {
   };
 
   @Selector()
-  public static pokedex$ (state) {
+  public static pokedex$ (state) : Pokedex {
     return state.pokedex;
   };
 
@@ -57,6 +58,7 @@ export class PokedexState {
   private onGetPokedexPokemon (
       { patchState }: StateContext<PokedexStateModel>,
       { payload }: PokedexGetPokedex) : void {
+
     patchState({
       count: payload.count,
       pokedex: payload.pokedex,
@@ -66,7 +68,8 @@ export class PokedexState {
 
   @Action(PokedexSetTo)
   private onSetPokedexTo (
-      { patchState, getState }: StateContext<PokedexStateModel>, { payload }: PokedexSetTo) : void {
+      { patchState, getState }: StateContext<PokedexStateModel>, 
+      { payload }: PokedexSetTo) : void {
     
     patchState({
       to: getState().to + payload.to
@@ -75,12 +78,16 @@ export class PokedexState {
 
   private onGetPokedexSuccess (response: PokedexHttpPokedex) : void {
 
+    const names: PokedexMap = {};
+
     const pokedex: Pokedex = new Pokedex(response.results);
 
-    const pokemon: Array<PokedexPokemon> = Object.values(pokedex);
+    const pokemon: Array<PokedexPokemon> = Object.values(pokedex).map(
+      (pokemon: PokedexPokemon) => (names[pokemon.name] = pokemon));
 
     this.store.dispatch(new PokedexGetPokedex({
       count: pokemon.length,
+      names: names,
       pokedex: pokedex,
       pokemon: pokemon
     }));
