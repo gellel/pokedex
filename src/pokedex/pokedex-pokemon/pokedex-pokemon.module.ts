@@ -5,6 +5,8 @@ import { NgxsModule } from '@ngxs/store';
 import { PokedexPokemonComponent } from './pokedex-pokemon.component';
 import { PokedexPokemonRouteModule } from './pokedex-pokemon.route';
 import { RouterModule } from '@angular/router';
+import { PokedexCardModule } from '@pokedex/pokedex-pokedex/pokedex-card';
+
 
 @NgModule({
   declarations: [
@@ -16,6 +18,7 @@ import { RouterModule } from '@angular/router';
     NgxsModule.forFeature([
       
     ]),
+    PokedexCardModule,
     PokedexPokemonRouteModule,
     RouterModule
   ],

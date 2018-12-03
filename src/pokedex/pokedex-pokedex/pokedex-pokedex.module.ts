@@ -1,16 +1,15 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { NgxsModule } from '@ngxs/store';
 import { PokedexPokedexComponent } from './pokedex-pokedex.component';
+import { PokedexCardModule } from './pokedex-card';
 import { PokedexGlyphModule } from './pokedex-glyph';
-import { RouterModule } from '@angular/router';
-import { PokedexCardComponent } from './pokedex-card/pokedex-card.component';
 
 @NgModule({
   declarations: [
     PokedexPokedexComponent,
-    PokedexCardComponent,
   ],
   imports: [
     CommonModule,
@@ -18,6 +17,7 @@ import { PokedexCardComponent } from './pokedex-card/pokedex-card.component';
     NgxsModule.forFeature([
       
     ]),
+    PokedexCardModule,
     PokedexGlyphModule,
     RouterModule
   ],
