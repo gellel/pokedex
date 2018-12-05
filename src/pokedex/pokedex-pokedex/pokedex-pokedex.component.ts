@@ -23,7 +23,7 @@ export class PokedexPokedexComponent implements OnInit {
     for (let key in response.body) {
       pokemon$[key] = response.body[key];
     };
-    console.log(pokemon$)
+    //console.log(pokemon$)
   };
 
   private onGetPokemonError(error: HttpErrorResponse, pokemon$: PokedexPokemon) : void {

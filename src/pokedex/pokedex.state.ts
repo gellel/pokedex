@@ -36,6 +36,7 @@ import {
   name: 'pokedex',
   defaults: {
     count: 0,
+    names: {},
     pokedex: {},
     pokemon: [],
     from: 0,
@@ -45,7 +46,12 @@ import {
 export class PokedexState {
 
   @Selector()
-  public static pokemon$ (state) {
+  public static names$ (state) : Pokedex {
+    return state.names;
+  };
+
+  @Selector()
+  public static pokemon$ (state) : Array<PokedexPokemon> {
     return state.pokemon.slice(state.from, state.to);
   };
 
@@ -61,6 +67,7 @@ export class PokedexState {
 
     patchState({
       count: payload.count,
+      names: payload.names,
       pokedex: payload.pokedex,
       pokemon: payload.pokemon
     });

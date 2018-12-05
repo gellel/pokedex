@@ -1,8 +1,11 @@
-import {
-  Store, State
-} from '@ngxs/store';
-import { HttpClient } from '@angular/common/http';
+import { 
+  HttpClient
+} from '@angular/common/http';
 
+import {
+  State,
+  Store
+} from '@ngxs/store';
 
 @State<{}>({
   name: 'pokemon'
