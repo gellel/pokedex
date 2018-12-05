@@ -1,4 +1,4 @@
 <!--button routerLink="">back</button-->
 
 
-<pokedex-card *ngIf="pokemon?.name && pokemon?.id && pokemon?.url" [pokemon]="pokemon"></pokedex-card>
+<pokedex-card *ngIf="pokemon?.http$" [pokemon]="pokemon"></pokedex-card>
