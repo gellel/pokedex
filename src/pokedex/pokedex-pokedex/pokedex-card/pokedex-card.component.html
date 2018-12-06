@@ -2,8 +2,16 @@
   <aside>
     {{ pokemon?.id }}
   </aside>
-  <h4>{{ pokemon?.name }}</h4>
+  <h4>
+    {{ pokemon?.name }}
+  </h4>
 </header>
 <article>
-  <p></p>
+  <h5>
+    habitat
+  </h5>
+  <p>
+    {{ pokemon?.species?.habitat?.name }}
+  </p>
+
 </article>
