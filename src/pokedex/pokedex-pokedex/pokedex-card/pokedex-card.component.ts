@@ -5,6 +5,7 @@ import { Store } from '@ngxs/store';
 import { PokedexState } from '@pokedex/pokedex.state';
 import { map, tap } from 'rxjs/operators';
 import { Pokedex } from '@pokedex/@/classes';
+import { PokedexCardNames } from './@';
 
 @Component({
   selector: 'pokedex-card',
@@ -15,6 +16,8 @@ export class PokedexCardComponent implements OnInit {
 
   @Input()
   public pokemon: PokedexPokemon;
+
+  public names: PokedexCardNames;
 
   constructor(private http: HttpClient, private store: Store) { }
 
@@ -34,11 +37,13 @@ export class PokedexCardComponent implements OnInit {
       Object.assign(pokedex[this.pokemon.name].species, { http$: response, }, response.body));
   };
 
-  onPokedexSpeciesFinally(pokedmonSpecies: PokedexPokemonSpecies) : void {
-    this.parsePokemonNames(pokedmonSpecies.names);
+  onPokedexSpeciesFinally(pokemonSpecies: PokedexPokemonSpecies) : void {
+    this.parsePokemonNames(pokemonSpecies.names);
   };
 
   parsePokemonNames(names: Array<PokedexPokemonName>) : void {
+    names.forEach((name: PokedexPokemonName) => {
 
+    });
   };
 }
