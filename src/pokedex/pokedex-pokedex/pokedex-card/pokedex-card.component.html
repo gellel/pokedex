@@ -3,37 +3,43 @@
     <button routerLink="/">x</button>
   </nav>
 </aside>
-<header>
-  <figure>
-    <picture>
-      <img src="{{ pokemon?.sprites?.front_default }}">
-    </picture>
-  </figure>
-  <aside>
-    {{ pokemon?.id }}
-  </aside>
-  <h4>
-    {{ pokemon?.name }}
-  </h4>
-  <h5>
-    {{ pokemon?.names?.ja?.name }}
-  </h5>
-</header>
-<article>
-  <section>
-    <h5>
-      shape
-    </h5>
-    <p>
-      {{ pokemon?.species?.shape?.name }}
-    </p>
-  </section>
-  <section>
-    <h5>
-      habitat
-    </h5>
-    <p>
-      {{ pokemon?.species?.habitat?.name }}
-    </p>
-  </section>
-</article>
+<main>
+  <div>
+    <figure>
+      <picture>
+        <img src="{{ pokemon?.sprites?.front_default }}">
+      </picture>
+    </figure>
+  </div>
+  <div>
+    <header>
+      <aside>
+        {{ pokemon?.id }}
+      </aside>
+      <h4>
+        {{ pokemon?.name }}
+      </h4>
+      <h5>
+        {{ pokemon?.names?.ja?.name }}
+      </h5>
+    </header>
+    <article>
+      <section>
+        <h5>
+          shape
+        </h5>
+        <p>
+          {{ pokemon?.species?.shape?.name }}
+        </p>
+      </section>
+      <section>
+        <h5>
+          habitat
+        </h5>
+        <p>
+          {{ pokemon?.species?.habitat?.name }}
+        </p>
+      </section>
+    </article>
+  </div>
+</main>

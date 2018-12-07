@@ -7,3 +7,27 @@
   min-width: 30vw;
   padding: 8px;
 }
+
+main {
+  display: flex;
+  flex-direction: row;
+}
+
+main > * {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center
+}
+
+main > * + * {
+  flex-grow: 1;
+}
+
+main > * + * > * {
+  align-self: stretch;
+}
+
+figure {
+  margin: 0;
+}
