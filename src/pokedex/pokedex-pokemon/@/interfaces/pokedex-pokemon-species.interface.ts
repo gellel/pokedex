@@ -1,3 +1,5 @@
+import { PokedexPokemonName } from "./pokedex-pokemon-name.interface";
+
 export interface PokedexPokemonSpecies {
   base_happiness: number;
   capture_rate: number;
@@ -17,7 +19,7 @@ export interface PokedexPokemonSpecies {
   hatch_counter: number;
   is_baby: boolean;
   name: string;
-  names: Array<object>;
+  names: Array<PokedexPokemonName>;
   pal_park_encounters: Array<object>;
   pokedex_numbers: Array<object>;
   shape: object;

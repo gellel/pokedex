@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { PokedexPokemon, PokedexPokemonSpecies } from '@pokedex/pokedex-pokemon';
+import { PokedexPokemon, PokedexPokemonSpecies, PokedexPokemonName } from '@pokedex/pokedex-pokemon';
 import { HttpClient, HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Store } from '@ngxs/store';
 import { PokedexState } from '@pokedex/pokedex.state';
@@ -32,5 +32,13 @@ export class PokedexCardComponent implements OnInit {
   onPokedexSpeciesResolve(response: HttpResponse<PokedexPokemonSpecies>) : void {
     this.store.selectOnce(PokedexState.names$).toPromise().then((pokedex: Pokedex) => 
       Object.assign(pokedex[this.pokemon.name].species, { http$: response, }, response.body));
+  };
+
+  onPokedexSpeciesFinally(pokedmonSpecies: PokedexPokemonSpecies) : void {
+    this.parsePokemonNames(pokedmonSpecies.names);
+  };
+
+  parsePokemonNames(names: Array<PokedexPokemonName>) : void {
+
   };
 }
