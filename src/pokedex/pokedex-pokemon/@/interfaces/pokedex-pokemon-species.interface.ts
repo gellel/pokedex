@@ -1,4 +1,5 @@
 import { PokedexPokemonName } from "./pokedex-pokemon-name.interface";
+import { PokedexPokemonEvolutionChain } from "./pokedex-pokemon-evolution-chain.interface";
 
 export interface PokedexPokemonSpecies {
   base_happiness: number;
@@ -6,7 +7,7 @@ export interface PokedexPokemonSpecies {
   color: object;
   egg_groups: Array<object>;
   evolution_chain: object;
-  evolve_from_species: object;
+  evolve_from_species: PokedexPokemonEvolutionChain;
   flavor_text_entries: Array<object>;
   form_descriptions: Array<object>;
   forms_switchable: boolean;
