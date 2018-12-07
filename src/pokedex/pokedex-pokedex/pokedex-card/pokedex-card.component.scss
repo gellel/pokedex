@@ -6,6 +6,7 @@
   flex-direction: column;
   min-width: 30vw;
   padding: 8px;
+  position: relative;
 }
 
 main {
@@ -30,4 +31,27 @@ main > * + * > * {
 
 figure {
   margin: 0;
+}
+
+picture {
+  display: flex;
+}
+
+picture > img {
+  display: block;
+}
+
+aside.outside {
+  position: absolute;
+  right: 0;
+  top: 0;
+  
+  & > nav {
+    position: relative;
+
+    & > button {
+      bottom: 10px;
+      position: absolute;
+    }
+  }
 }
