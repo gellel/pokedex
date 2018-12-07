@@ -1,5 +1,5 @@
 import { HttpResponseBase, HttpResponse } from "@angular/common/http";
-import { PokedexPokemonHttp, PokedexPokemonSprites, PokedexPokemonNames } from "../interfaces";
+import { PokedexPokemonHttp, PokedexPokemonSprites, PokedexPokemonNames, PokedexPokemonSpecies } from "../interfaces";
 
 
 export class PokedexPokemon implements PokedexPokemonHttp {
@@ -19,7 +19,7 @@ export class PokedexPokemon implements PokedexPokemonHttp {
   public names?: PokedexPokemonNames;
   public order: number;
   public sprites: PokedexPokemonSprites;
-  public species: object;
+  public species: PokedexPokemonSpecies;
   public stats: object;
   public types: object;
   public url: string;

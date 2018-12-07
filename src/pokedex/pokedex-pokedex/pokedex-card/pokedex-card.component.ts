@@ -5,6 +5,7 @@ import { Store } from '@ngxs/store';
 import { PokedexState } from '@pokedex/pokedex.state';
 import { map, tap } from 'rxjs/operators';
 import { Pokedex } from '@pokedex/@/classes';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'pokedex-card',
@@ -21,11 +22,35 @@ export class PokedexCardComponent implements OnInit {
   constructor(private http: HttpClient, private store: Store) { }
 
   ngOnInit() {
-    this.http.get(this.pokemon.species['url'], { observe: 'response' }).toPromise()
-      .then((response: HttpResponse<PokedexPokemonSpecies>) => this.onPokedexSpeciesResolve(response))
-        .catch((error: HttpErrorResponse) => this.onPokedexSpeciesReject(error))
-          .finally(() => this.onPokedexSpeciesFinally(<PokedexPokemonSpecies>this.pokemon.species));
-  }
+    
+    this.attemptPokedexSpeciesRequest().toPromise().then(()=>{
+      console.log(this.pokemon.names)
+    })
+    
+  };
+
+  attemptPokedexSpeciesRequest() : Observable<any> {
+    return of(this.http.get(this.pokemon.species['url'], { observe: 'response' }).toPromise()
+    .then((response: HttpResponse<PokedexPokemonSpecies>) => this.onPokedexSpeciesResolve(response))
+      .catch((error: HttpErrorResponse) => this.onPokedexSpeciesReject(error)));
+  };
+
+  attemptPokedexEvolutionChainRequest() : Observable<boolean> {
+    return of(true);
+    //return of(this.http.get(this.pokemon.species.evolution_chain.));
+  };
+
+  onPokdexEvolutionChainReject(error: HttpErrorResponse) : void {
+    
+  };
+
+  onPokedexEvolutionChainResolve(response: any) : void {
+
+  };
+
+  onPokedexEvolutionChainFinally() : void {
+
+  };
 
   onPokedexSpeciesReject(error: HttpErrorResponse) : void {
     console.error(error);
@@ -33,10 +58,10 @@ export class PokedexCardComponent implements OnInit {
 
   onPokedexSpeciesResolve(response: HttpResponse<PokedexPokemonSpecies>) : void {
     this.store.selectOnce(PokedexState.names$).toPromise().then((pokedex: Pokedex) => 
-      Object.assign(pokedex[this.pokemon.name].species, { http$: response, }, response.body));
+      this.onPokedexSpeciesFinally(Object.assign(pokedex[this.pokemon.name].species, { http$: response, }, response.body)));
   };
 
-  onPokedexSpeciesFinally(pokemonSpecies: PokedexPokemonSpecies) : void {
+  onPokedexSpeciesFinally(pokemonSpecies?: PokedexPokemonSpecies) : void {
     this.parsePokemonNames(pokemonSpecies.names);
   };
 
