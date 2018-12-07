@@ -1,1 +1,0 @@
-export * from './pokedex-card-names.interface';

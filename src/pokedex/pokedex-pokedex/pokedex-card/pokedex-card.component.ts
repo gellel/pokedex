@@ -5,7 +5,6 @@ import { Store } from '@ngxs/store';
 import { PokedexState } from '@pokedex/pokedex.state';
 import { map, tap } from 'rxjs/operators';
 import { Pokedex } from '@pokedex/@/classes';
-import { PokedexCardNames } from './@';
 
 @Component({
   selector: 'pokedex-card',
@@ -17,7 +16,7 @@ export class PokedexCardComponent implements OnInit {
   @Input()
   public pokemon: PokedexPokemon;
 
-  public names: PokedexCardNames;
+  //public names: PokedexCardNames;
 
   constructor(private http: HttpClient, private store: Store) { }
 
@@ -25,7 +24,7 @@ export class PokedexCardComponent implements OnInit {
     this.http.get(this.pokemon.species['url'], { observe: 'response' }).toPromise()
       .then((response: HttpResponse<PokedexPokemonSpecies>) => this.onPokedexSpeciesResolve(response))
         .catch((error: HttpErrorResponse) => this.onPokedexSpeciesReject(error))
-          .finally(() => console.log(this.pokemon));
+          .finally(() => this.onPokedexSpeciesFinally(<PokedexPokemonSpecies>this.pokemon.species));
   }
 
   onPokedexSpeciesReject(error: HttpErrorResponse) : void {
@@ -42,8 +41,11 @@ export class PokedexCardComponent implements OnInit {
   };
 
   parsePokemonNames(names: Array<PokedexPokemonName>) : void {
+    this.pokemon.names = {};
     names.forEach((name: PokedexPokemonName) => {
-
+      this.pokemon.names[name.language.name] = name;
     });
+
+    console.log(this.pokemon)
   };
 }

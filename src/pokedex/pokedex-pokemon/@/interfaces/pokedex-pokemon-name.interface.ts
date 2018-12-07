@@ -1,4 +1,6 @@
+import { PokedexPokemonLanguage } from "./pokedex-pokemon-language.interface";
+
 export interface PokedexPokemonName {
-  language: object;
+  language: PokedexPokemonLanguage;
   name: string;
 };
