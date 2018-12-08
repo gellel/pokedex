@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { PokedexPokemon, PokedexPokemonSpecies, PokedexPokemonName } from '@pokedex/pokedex-pokemon';
+import { PokedexPokemon, PokedexPokemonSpecies, PokedexPokemonName, PokedexPokemonSpeciesEvolutionChain } from '@pokedex/pokedex-pokemon';
 import { HttpClient, HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Store } from '@ngxs/store';
 import { PokedexState } from '@pokedex/pokedex.state';
@@ -39,7 +39,7 @@ export class PokedexCardComponent implements OnInit {
 
   attemptPokedexEvolutionChainRequest() : Observable<any> {
     return of(this.http.get(this.pokemon.species.evolution_chain.url, { observe: 'response' }).toPromise()
-      .then((response) => this.onPokedexEvolutionChainResolve(response))
+      .then((response: HttpResponse<PokedexPokemonSpeciesEvolutionChain>) => this.onPokedexEvolutionChainResolve(response))
         .catch((error: HttpErrorResponse) => this.onPokdexEvolutionChainReject(error)));
   };
 
@@ -47,8 +47,8 @@ export class PokedexCardComponent implements OnInit {
     
   };
 
-  onPokedexEvolutionChainResolve(response: any) : void {
-    console.log('evolution response', response);
+  onPokedexEvolutionChainResolve(response: HttpResponse<PokedexPokemonSpeciesEvolutionChain>) : void {
+    console.log('evolution response', response.body);
   };
 
   onPokedexEvolutionChainFinally() : void {
@@ -73,7 +73,9 @@ export class PokedexCardComponent implements OnInit {
     names.forEach((name: PokedexPokemonName) => {
       this.pokemon.names[name.language.name] = name;
     });
-
-    console.log(this.pokemon)
   };
-}
+
+  parsePokemonDescriptions() : void {};
+
+  parsePokemonEvolutionChain() : void {};
+};
