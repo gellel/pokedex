@@ -9,7 +9,8 @@ import {
   PokedexPokemonSprites,
   PokedexPokemonName,
   PokedexPokemonNames,
-  PokedexPokemonSpecies
+  PokedexPokemonSpecies,
+  PokedexPokemonFlavorDescriptions
 } from "../interfaces";
 
 import {
@@ -23,6 +24,7 @@ export class PokedexPokemon implements PokedexPokemonHttp {
   public $http: HttpResponse<PokedexPokemonHttp>;
   public abilities: object;
   public base_experience: number;
+  public descriptions?: PokedexPokemonFlavorDescriptions;
   public evolutions?: any;
   public height: number;
   public id: number;
@@ -59,9 +61,21 @@ export class PokedexPokemon implements PokedexPokemonHttp {
   };
 
   addPokemonFlavorDescriptions(descriptions: Array<PokedexPokemonFlavorText>) : void {
+    this.descriptions = {};
     descriptions.forEach((description: PokedexPokemonFlavorText) => {
-      console.log(description);
+
+      let desc = this.descriptions.hasOwnProperty(description.language.name) ? 
+        this.descriptions[description.language.name] : {[description.language.name]: {}};
+      
+      let version = desc[description.version.name] = desc.hasOwnProperty(description.version.name) ? 
+        desc[description.version.name] : {[description.version.name]: {}};
+
+      version['description'] = description.flavor_text;
+
+      Object.assign(this.descriptions, desc);
     });
+
+    console.log(this.descriptions)
   };
 
   addPokemonEvolutions() : void {};
