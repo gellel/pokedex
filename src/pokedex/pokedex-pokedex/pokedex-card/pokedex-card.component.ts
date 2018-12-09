@@ -24,8 +24,6 @@ export class PokedexCardComponent implements OnInit {
   ngOnInit() {
     
     this.attemptPokedexSpeciesRequest().toPromise().then(()=>{
-      console.log(this.pokemon.names)
-
       this.attemptPokedexEvolutionChainRequest().toPromise().then(()=>{});
     })
     

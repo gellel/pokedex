@@ -49,7 +49,8 @@ export class PokedexPokemon implements PokedexPokemonHttp {
       id: number,
       name: string,
       url: string) {
-
+    
+    this.descriptions = {};
     this.id = id;
     this.name = name;
     this.names = {};
@@ -61,21 +62,22 @@ export class PokedexPokemon implements PokedexPokemonHttp {
   };
 
   addPokemonFlavorDescriptions(descriptions: Array<PokedexPokemonFlavorText>) : void {
-    this.descriptions = {};
     descriptions.forEach((description: PokedexPokemonFlavorText) => {
 
-      let desc = this.descriptions.hasOwnProperty(description.language.name) ? 
-        this.descriptions[description.language.name] : {[description.language.name]: {}};
-      
-      let version = desc[description.version.name] = desc.hasOwnProperty(description.version.name) ? 
-        desc[description.version.name] : {[description.version.name]: {}};
+      const desc = this.descriptions;
 
-      version['description'] = description.flavor_text;
+      const language: string = description.language.name;
 
-      Object.assign(this.descriptions, desc);
+      const version: string = description.version.name;
+
+      desc[language] = (desc.hasOwnProperty(language) &&
+        desc[language] instanceof Object) ? desc[language] : {};
+
+      if (!(desc[language].hasOwnProperty(version) &&
+        desc[language][version] instanceof Object))
+          desc[language][version] = { description: description.flavor_text };
+
     });
-
-    console.log(this.descriptions)
   };
 
   addPokemonEvolutions() : void {};
