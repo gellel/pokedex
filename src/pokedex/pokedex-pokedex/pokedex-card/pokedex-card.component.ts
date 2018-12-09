@@ -51,31 +51,11 @@ export class PokedexCardComponent implements OnInit {
     console.log('evolution response', response.body);
   };
 
-  onPokedexEvolutionChainFinally() : void {
-
-  };
-
   onPokedexSpeciesReject(error: HttpErrorResponse) : void {
     console.error(error);
   };
 
   onPokedexSpeciesResolve(response: HttpResponse<PokedexPokemonSpecies>) : void {
-    this.store.selectOnce(PokedexState.names$).toPromise().then((pokedex: Pokedex) => 
-      this.onPokedexSpeciesFinally(Object.assign(pokedex[this.pokemon.name].species, { http$: response, }, response.body)));
+    this.pokemon.addPokemonSpecies(response);
   };
-
-  onPokedexSpeciesFinally(pokemonSpecies?: PokedexPokemonSpecies) : void {
-    this.parsePokemonNames(pokemonSpecies.names);
-  };
-
-  parsePokemonNames(names: Array<PokedexPokemonName>) : void {
-    this.pokemon.names = {};
-    names.forEach((name: PokedexPokemonName) => {
-      this.pokemon.names[name.language.name] = name;
-    });
-  };
-
-  parsePokemonDescriptions() : void {};
-
-  parsePokemonEvolutionChain() : void {};
 };

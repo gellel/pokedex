@@ -18,12 +18,7 @@ export class PokedexPokedexComponent implements OnInit {
 
 
   private onGetPokemonSuccess(response: HttpResponse<PokedexPokemonHttp>, pokemon$: PokedexPokemon) : void {
-    pokemon$.http$ = response;
-
-    for (let key in response.body) {
-      pokemon$[key] = response.body[key];
-    };
-    //console.log(pokemon$)
+    pokemon$.addPokemonBase(response);
   };
 
   private onGetPokemonError(error: HttpErrorResponse, pokemon$: PokedexPokemon) : void {
