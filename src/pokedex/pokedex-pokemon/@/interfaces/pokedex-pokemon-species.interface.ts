@@ -1,6 +1,7 @@
+import { HttpResponse } from "@angular/common/http";
 import { PokedexPokemonName } from "./pokedex-pokemon-name.interface";
 import { PokedexPokemonSpeciesEvolutionChain } from "./pokedex-pokemon-species-evolution-chain.interface";
-import { HttpResponse } from "@angular/common/http";
+import { PokedexPokemonFlavorText } from "./pokedex-pokemon-flavor-text.interface";
 
 export interface PokedexPokemonSpecies {
   $http?: HttpResponse<PokedexPokemonSpecies>;
@@ -10,7 +11,7 @@ export interface PokedexPokemonSpecies {
   egg_groups?: Array<object>;
   evolution_chain?: PokedexPokemonSpeciesEvolutionChain;
   evolve_from_species?: object;
-  flavor_text_entries?: Array<object>;
+  flavor_text_entries?: Array<PokedexPokemonFlavorText>;
   form_descriptions?: Array<object>;
   forms_switchable?: boolean;
   gender_rate?: number;

@@ -4,6 +4,7 @@ import {
 } from "@angular/common/http";
 
 import {
+  PokedexPokemonFlavorText,
   PokedexPokemonHttp,
   PokedexPokemonSprites,
   PokedexPokemonName,
@@ -57,7 +58,11 @@ export class PokedexPokemon implements PokedexPokemonHttp {
     Object.assign(this, { $http: response }, response.body);
   };
 
-  addPokemonDescriptions() : void {};
+  addPokemonFlavorDescriptions(descriptions: Array<PokedexPokemonFlavorText>) : void {
+    descriptions.forEach((description: PokedexPokemonFlavorText) => {
+      console.log(description);
+    });
+  };
 
   addPokemonEvolutions() : void {};
 
@@ -70,5 +75,6 @@ export class PokedexPokemon implements PokedexPokemonHttp {
     this.species = Object.assign({ $http: response }, response.body);
 
     this.addPokemonNames(this.species.names);
+    this.addPokemonFlavorDescriptions(this.species.flavor_text_entries);
   };
 };
