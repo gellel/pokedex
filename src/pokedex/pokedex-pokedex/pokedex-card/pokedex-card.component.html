@@ -5,11 +5,11 @@
 </aside>
 <main>
   <div>
-    <figure>
-      <picture>
-        <img src="{{ pokemon?.sprites?.front_default }}">
-      </picture>
-    </figure>
+    <pokedex-glyph
+      [id]="pokemon.id"
+      [name]="pokemon.name"
+      [sprites]="pokemon.sprites"
+      [link]="false"></pokedex-glyph>
   </div>
   <div>
     <header>
@@ -24,6 +24,17 @@
       </h5>
     </header>
     <article>
+      <section>
+        <h5>
+          description
+        </h5>
+        <p>
+          {{ pokemon?.descriptions?.en?.red?.description}}
+        </p>
+        <blockquote>
+          - english, pokemon red
+        </blockquote>
+      </section>
       <section>
         <h5>
           shape

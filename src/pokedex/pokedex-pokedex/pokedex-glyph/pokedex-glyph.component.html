@@ -1,4 +1,4 @@
 <figure>
-  <img src="{{ sprites?.front_default }}" routerLink="{{ name }}">
+  <img src="{{ sprites?.front_default }}" [routerLink]="link ? [name] : []">
 </figure>
-<button>+</button>
+<button *ngIf="more">+</button>

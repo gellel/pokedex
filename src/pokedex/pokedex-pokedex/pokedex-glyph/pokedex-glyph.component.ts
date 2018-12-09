@@ -15,6 +15,12 @@ export class PokedexGlyphComponent implements OnChanges, OnInit {
   id: number;
 
   @Input()
+  link?: boolean = true;
+
+  @Input()
+  more?: boolean = false;
+
+  @Input()
   name: string;
   
   @Input()
