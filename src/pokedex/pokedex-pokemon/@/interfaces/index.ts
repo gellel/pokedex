@@ -1,5 +1,6 @@
 export * from './pokedex-pokemon-flavor-descriptions.interface';
 export * from './pokedex-pokemon-evolution-chain.interface';
+export * from './pokedex-pokemon-evolution-chain.interface';
 export * from './pokedex-pokemon-flavor-text.interface';
 export * from './pokedex-pokemon-http.interface';
 export * from './pokedex-pokemon-language.interface';

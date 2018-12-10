@@ -6,6 +6,7 @@ import { PokedexState } from '@pokedex/pokedex.state';
 import { map, tap } from 'rxjs/operators';
 import { Pokedex } from '@pokedex/@/classes';
 import { Observable, of } from 'rxjs';
+import { PokedexPokemonEvolutionBase } from '@pokedex/pokedex-pokemon/@/interfaces/pokedex-pokemon-evolution-base.interface';
 
 @Component({
   selector: 'pokedex-card',
@@ -37,7 +38,7 @@ export class PokedexCardComponent implements OnInit {
 
   attemptPokedexEvolutionChainRequest() : Observable<any> {
     return of(this.http.get(this.pokemon.species.evolution_chain.url, { observe: 'response' }).toPromise()
-      .then((response: HttpResponse<PokedexPokemonSpeciesEvolutionChain>) => this.onPokedexEvolutionChainResolve(response))
+      .then((response: HttpResponse<PokedexPokemonEvolutionBase>) => this.onPokedexEvolutionChainResolve(response))
         .catch((error: HttpErrorResponse) => this.onPokdexEvolutionChainReject(error)));
   };
 
@@ -45,8 +46,10 @@ export class PokedexCardComponent implements OnInit {
     
   };
 
-  onPokedexEvolutionChainResolve(response: HttpResponse<PokedexPokemonSpeciesEvolutionChain>) : void {
-    console.log('evolution response', response.body);
+  onPokedexEvolutionChainResolve(response: HttpResponse<PokedexPokemonEvolutionBase>) : void {
+    this.pokemon.addPokemonEvolutions(response.body.chain);
+
+    
   };
 
   onPokedexSpeciesReject(error: HttpErrorResponse) : void {
@@ -55,5 +58,9 @@ export class PokedexCardComponent implements OnInit {
 
   onPokedexSpeciesResolve(response: HttpResponse<PokedexPokemonSpecies>) : void {
     this.pokemon.addPokemonSpecies(response);
+  };
+
+  private walkThroughPokemonEvolutionChain(evolution: PokedexPokemonSpeciesEvolutionChain, sequence: Array<PokedexPokemonSpeciesEvolutionChain>) : any {
+
   };
 };

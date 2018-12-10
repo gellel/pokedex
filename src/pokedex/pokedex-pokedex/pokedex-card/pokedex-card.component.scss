@@ -70,3 +70,7 @@ aside.outside {
     }
   }
 }
+
+pokedex-glyph:last-child ::ng-deep {
+  --offset: 10px;
+}

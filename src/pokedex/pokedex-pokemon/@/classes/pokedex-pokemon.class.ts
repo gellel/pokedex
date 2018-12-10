@@ -10,7 +10,8 @@ import {
   PokedexPokemonName,
   PokedexPokemonNames,
   PokedexPokemonSpecies,
-  PokedexPokemonFlavorDescriptions
+  PokedexPokemonFlavorDescriptions,
+  PokedexPokemonEvolutionChain
 } from "../interfaces";
 
 import {
@@ -80,7 +81,9 @@ export class PokedexPokemon implements PokedexPokemonHttp {
     });
   };
 
-  addPokemonEvolutions() : void {};
+  addPokemonEvolutions(evolutions: PokedexPokemonEvolutionChain) : void {
+    console.log(evolutions)
+  };
 
   addPokemonNames(names: Array<PokedexPokemonName>) : Observable<any> {
     return of(names.forEach((name: PokedexPokemonName) => 
