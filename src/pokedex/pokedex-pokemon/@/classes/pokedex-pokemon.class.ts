@@ -11,7 +11,8 @@ import {
   PokedexPokemonNames,
   PokedexPokemonSpecies,
   PokedexPokemonFlavorDescriptions,
-  PokedexPokemonEvolutionChain
+  PokedexPokemonEvolutionChain,
+  PokedexPokemonEvolutionBase
 } from "../interfaces";
 
 import {
@@ -81,8 +82,9 @@ export class PokedexPokemon implements PokedexPokemonHttp {
     });
   };
 
-  addPokemonEvolutions(evolutions: PokedexPokemonEvolutionChain) : void {
-    console.log(evolutions)
+  addPokemonEvolutions(response: HttpResponse<PokedexPokemonEvolutionBase>) : void {
+    Object.assign(this.species.evolution_chain, { $http: response }, response.body);
+    console.log('evolutions', this.walkThroughPokemonEvolutionChain(this.species.evolution_chain.chain, []))
   };
 
   addPokemonNames(names: Array<PokedexPokemonName>) : Observable<any> {
@@ -95,5 +97,13 @@ export class PokedexPokemon implements PokedexPokemonHttp {
 
     this.addPokemonNames(this.species.names);
     this.addPokemonFlavorDescriptions(this.species.flavor_text_entries);
+  };
+
+  walkThroughPokemonEvolutionChain(evolution: PokedexPokemonEvolutionChain, sequence: Array<PokedexPokemonEvolutionChain>) : Array<PokedexPokemonEvolutionChain> {
+    /** works okay for linear evolution; pokemon such as eevee might cause this to miss items. need to check. */
+    while (evolution.evolves_to.length) {
+      return this.walkThroughPokemonEvolutionChain(evolution.evolves_to[0], [...sequence, evolution]);
+    };
+    return [...sequence, evolution].filter((evolution: PokedexPokemonEvolutionChain) => evolution.species.name !== this.name);
   };
 };

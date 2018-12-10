@@ -47,7 +47,7 @@ export class PokedexCardComponent implements OnInit {
   };
 
   onPokedexEvolutionChainResolve(response: HttpResponse<PokedexPokemonEvolutionBase>) : void {
-    this.pokemon.addPokemonEvolutions(response.body.chain);
+    this.pokemon.addPokemonEvolutions(response);
 
     
   };
@@ -58,9 +58,5 @@ export class PokedexCardComponent implements OnInit {
 
   onPokedexSpeciesResolve(response: HttpResponse<PokedexPokemonSpecies>) : void {
     this.pokemon.addPokemonSpecies(response);
-  };
-
-  private walkThroughPokemonEvolutionChain(evolution: PokedexPokemonSpeciesEvolutionChain, sequence: Array<PokedexPokemonSpeciesEvolutionChain>) : any {
-
   };
 };
