@@ -4,6 +4,10 @@ import {
 } from "@angular/common/http";
 
 import {
+  PokedexMap
+} from '@pokedex/@/interfaces';
+
+import {
   PokedexPokemonFlavorText,
   PokedexPokemonHttp,
   PokedexPokemonSprites,
@@ -27,7 +31,7 @@ export class PokedexPokemon implements PokedexPokemonHttp {
   public abilities: object;
   public base_experience: number;
   public descriptions?: PokedexPokemonFlavorDescriptions;
-  public evolutions?: Array<PokedexPokemon>;
+  public evolutions?: PokedexMap;
   public evolutionChain?: Array<PokedexPokemonEvolutionChain>;
   public height: number;
   public id: number;
@@ -54,6 +58,7 @@ export class PokedexPokemon implements PokedexPokemonHttp {
       url: string) {
     
     this.descriptions = {};
+    this.evolutions = {};
     this.id = id;
     this.name = name;
     this.names = {};

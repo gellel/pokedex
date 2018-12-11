@@ -12,15 +12,18 @@ import { Pokedex } from '@pokedex/@/classes';
 export class PokedexEvolutionsComponent implements OnChanges, OnInit {
 
   @Input()
-  public evolutions: Array<PokedexPokemonEvolutionChain>;
+  public evolutionChain: Array<PokedexPokemonEvolutionChain>;
 
   constructor(private store: Store) { }
 
   ngOnChanges(changes: SimpleChanges) : void {
-    if((!changes.evolutions.firstChange) && (changes.evolutions.currentValue instanceof Array)) {
+    if((!changes.evolutionChain.firstChange) && (changes.evolutionChain.currentValue instanceof Array)) {
       this.store.selectOnce(PokedexState.names$).toPromise().then((pokedex: Pokedex) => {
-        changes.evolutions.currentValue.forEach((evolution: PokedexPokemonEvolutionChain) => {
-          console.log(pokedex[evolution.species.name].$http)
+        changes.evolutionChain.currentValue.forEach((evolution: PokedexPokemonEvolutionChain) => {
+          if(pokedex[evolution.species.name].$http) {
+            /// maybe i need to pass in the actual pokemon as well.
+            console.log('doesn\'t need to fetch', evolution.species.name)
+          }
         });
       });
     }
