@@ -5,12 +5,13 @@
 </aside>
 <main>
   <div>
-    <pokedex-evolutions></pokedex-evolutions>
-    <pokedex-glyph
-      [id]="pokemon.id"
-      [name]="pokemon.name"
-      [sprites]="pokemon.sprites"
-      [link]="false"></pokedex-glyph>
+    <figure>
+      <pokedex-glyph
+        [id]="pokemon.id"
+        [name]="pokemon.name"
+        [sprites]="pokemon.sprites"
+        [link]="false"></pokedex-glyph>
+    </figure>
   </div>
   <div>
     <header>
@@ -51,6 +52,10 @@
         <p>
           {{ pokemon?.species?.habitat?.name }}
         </p>
+      </section>
+      <section>
+          <pokedex-evolutions
+          [evolutions]="pokemon.evolutionChain"></pokedex-evolutions>
       </section>
     </article>
   </div>

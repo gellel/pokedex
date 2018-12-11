@@ -14,9 +14,6 @@ import { PokedexGlyphModule } from '../pokedex-glyph';
   imports: [
     CommonModule,
     HttpClientModule,
-    NgxsModule.forFeature([
-      
-    ]),
     PokedexEvolutionsModule,
     PokedexGlyphModule,
     RouterModule
