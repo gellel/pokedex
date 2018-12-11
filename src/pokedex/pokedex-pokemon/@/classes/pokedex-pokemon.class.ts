@@ -27,7 +27,7 @@ export class PokedexPokemon implements PokedexPokemonHttp {
   public abilities: object;
   public base_experience: number;
   public descriptions?: PokedexPokemonFlavorDescriptions;
-  public evolutions?: any;
+  public evolutions?: Array<PokedexPokemonEvolutionChain>;
   public height: number;
   public id: number;
   public is_default: boolean;
@@ -84,7 +84,7 @@ export class PokedexPokemon implements PokedexPokemonHttp {
 
   addPokemonEvolutions(response: HttpResponse<PokedexPokemonEvolutionBase>) : void {
     Object.assign(this.species.evolution_chain, { $http: response }, response.body);
-    console.log('evolutions', this.walkThroughPokemonEvolutionChain(this.species.evolution_chain.chain, []))
+    console.log('evolutions', this.evolutions = this.walkThroughPokemonEvolutionChain(this.species.evolution_chain.chain, []))
   };
 
   addPokemonNames(names: Array<PokedexPokemonName>) : Observable<any> {
