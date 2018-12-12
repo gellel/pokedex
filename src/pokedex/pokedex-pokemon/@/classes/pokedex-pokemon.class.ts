@@ -110,6 +110,6 @@ export class PokedexPokemon implements PokedexPokemonHttp {
     while (evolution.evolves_to.length) {
       return this.walkThroughPokemonEvolutionChain(evolution.evolves_to[0], [...sequence, evolution]);
     };
-    return [...sequence, evolution].filter((evolution: PokedexPokemonEvolutionChain) => evolution.species.name !== this.name);
+    return [...sequence, evolution]; //.filter((evolution: PokedexPokemonEvolutionChain) => evolution.species.name !== this.name);
   };
 };

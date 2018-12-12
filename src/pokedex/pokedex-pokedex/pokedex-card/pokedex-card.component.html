@@ -55,7 +55,9 @@
       </section>
       <section>
         <pokedex-evolutions
-          [evolutionChain]="pokemon.evolutionChain"></pokedex-evolutions>
+          [evolutionChain]="pokemon?.evolutionChain"
+          [evolutions]="pokemon?.evolutions"
+          [name]="pokemon?.name"></pokedex-evolutions>
       </section>
     </article>
   </div>
