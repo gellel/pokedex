@@ -3,6 +3,9 @@
   flex-direction: row;
 }
 
-pokedex-glpyh {
-  --offset: 40px;
+pokedex-glyph ::ng-deep {
+  --offset: 60px;
+  --img-width: 96px;
+  --img-height: 96px;
+  --background-color: red;
 }

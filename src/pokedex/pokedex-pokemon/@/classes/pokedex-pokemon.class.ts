@@ -16,7 +16,8 @@ import {
   PokedexPokemonSpecies,
   PokedexPokemonFlavorDescriptions,
   PokedexPokemonEvolutionChain,
-  PokedexPokemonEvolutionBase
+  PokedexPokemonEvolutionBase,
+  PokedexPokemonSpeciesEvolutionChain
 } from "../interfaces";
 
 import {
@@ -88,7 +89,11 @@ export class PokedexPokemon implements PokedexPokemonHttp {
     });
   };
 
-  addPokemonEvolutions(response: HttpResponse<PokedexPokemonEvolutionBase>) : void {
+  addPokemonEvolution(pokemon: PokedexPokemon) : void {
+    this.evolutions[pokemon.name] = pokemon;
+  };
+
+  addPokemonEvolutionChain(response: HttpResponse<PokedexPokemonSpeciesEvolutionChain>) : void {
     Object.assign(this.species.evolution_chain, { $http: response }, response.body);
     console.log('evolutions', this.evolutionChain = this.walkThroughPokemonEvolutionChain(this.species.evolution_chain.chain, []))
   };

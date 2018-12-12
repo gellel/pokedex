@@ -3,6 +3,7 @@ import { PokedexPokemonEvolutionChain, PokedexPokemon } from '@pokedex/pokedex-p
 import { Store } from '@ngxs/store';
 import { PokedexState } from '@pokedex/pokedex.state';
 import { Pokedex } from '@pokedex/@/classes';
+import { PokedexMap } from '@pokedex/@/interfaces';
 
 @Component({
   selector: 'pokedex-evolutions',
@@ -15,33 +16,33 @@ export class PokedexEvolutionsComponent implements OnChanges, OnInit {
   public evolutionChain: Array<PokedexPokemonEvolutionChain>;
 
   @Input()
-  public evolutions: {[key:string]: PokedexPokemon};
+  public evolutions: PokedexMap;
 
   @Input()
   public name: string;
 
-  public pokemon: Array<PokedexPokemon>;
+  public pokedex: Array<PokedexPokemon>;
 
   constructor(private store: Store) { }
 
   ngOnChanges(changes: SimpleChanges) : void {
+
     if((!changes.evolutionChain.firstChange) && (changes.evolutionChain.currentValue instanceof Array)) {
-      this.store.selectOnce(PokedexState.names$).toPromise().then((pokedex: Pokedex) => {
-        changes.evolutionChain.currentValue.forEach((evolution: PokedexPokemonEvolutionChain) => {
-          if(pokedex[evolution.species.name].$http) {
-            pokedex[this.name].evolutions[evolution.species.name] = pokedex[evolution.species.name];
-            console.log('doesn\'t need to fetch', evolution.species.name);
-          }
-        });
-      });
+      this.onEvolutionChainChanges(changes.evolutionChain.currentValue);
     }
-    console.log(changes.evolutions)
   }
 
   ngOnInit() : void {}
 
-  private onEvolutionChainChanges(changes: SimpleChanges) : void {};
+  private onEvolutionChainChanges(evolutionChain: Array<PokedexPokemonEvolutionChain>) : void {
+    this.store.selectOnce(PokedexState.names$).toPromise().then((pokedex: Pokedex) => {
+      evolutionChain.forEach((evolution: PokedexPokemonEvolutionChain) => {
+        pokedex[this.name].addPokemonEvolution(pokedex[evolution.species.name]);
+      });
+      this.pokedex = Object.values(pokedex[this.name].evolutions);
+    });
+  };
 
-  private onEvolutionChanges(changes: SimpleChanges) : void {};
-
+  private onEvolutionChanges(evolutions: PokedexMap) : void {
+  };
 }

@@ -1,1 +1,5 @@
-<!--pokedex-glyph *ngFor="let evolution of evolutions"></pokedex-glyph-->
+<pokedex-glyph *ngFor="let pokemon of pokedex"
+  [id]="pokemon.id"
+  [link]="true"
+  [name]="pokemon.name"
+  [sprites]="pokemon.sprites"></pokedex-glyph>

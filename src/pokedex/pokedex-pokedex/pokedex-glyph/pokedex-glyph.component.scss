@@ -21,6 +21,12 @@ figure {
   width: inherit;
 }
 
+img {
+  display: flex;
+  height: var(--img-height, --size);
+  width: var(--img-width, --size);
+}
+
 button {
   --size: 24px;
   border: none;

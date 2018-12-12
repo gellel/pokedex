@@ -38,7 +38,7 @@ export class PokedexCardComponent implements OnInit {
 
   attemptPokedexEvolutionChainRequest() : Observable<any> {
     return of(this.http.get(this.pokemon.species.evolution_chain.url, { observe: 'response' }).toPromise()
-      .then((response: HttpResponse<PokedexPokemonEvolutionBase>) => this.onPokedexEvolutionChainResolve(response))
+      .then((response: HttpResponse<PokedexPokemonSpeciesEvolutionChain>) => this.onPokedexEvolutionChainResolve(response))
         .catch((error: HttpErrorResponse) => this.onPokdexEvolutionChainReject(error)));
   };
 
@@ -46,10 +46,8 @@ export class PokedexCardComponent implements OnInit {
     
   };
 
-  onPokedexEvolutionChainResolve(response: HttpResponse<PokedexPokemonEvolutionBase>) : void {
-    this.pokemon.addPokemonEvolutions(response);
-
-    
+  onPokedexEvolutionChainResolve(response: HttpResponse<PokedexPokemonSpeciesEvolutionChain>) : void {
+    this.pokemon.addPokemonEvolutionChain(response);
   };
 
   onPokedexSpeciesReject(error: HttpErrorResponse) : void {
