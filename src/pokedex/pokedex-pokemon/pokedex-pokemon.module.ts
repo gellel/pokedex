@@ -6,11 +6,13 @@ import { PokedexPokemonComponent } from './pokedex-pokemon.component';
 import { PokedexPokemonRouteModule } from './pokedex-pokemon.route';
 import { RouterModule } from '@angular/router';
 import { PokedexCardModule } from '@pokedex/pokedex-pokedex/pokedex-card';
+import { PokemonOverviewComponent } from './pokemon-overview/pokemon-overview.component';
 
 
 @NgModule({
   declarations: [
     PokedexPokemonComponent,
+    PokemonOverviewComponent,
   ],
   imports: [
     CommonModule,
