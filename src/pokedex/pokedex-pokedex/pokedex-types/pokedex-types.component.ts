@@ -1,11 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { PokedexPokemonTypes } from '@pokedex/pokedex-pokemon';
 
 @Component({
-  selector: 'app-pokedex-types',
+  selector: 'pokedex-types',
   templateUrl: './pokedex-types.component.html',
   styleUrls: ['./pokedex-types.component.scss']
 })
 export class PokedexTypesComponent implements OnInit {
+
+  @Input()
+  public types: PokedexPokemonTypes;
 
   constructor() { }
 

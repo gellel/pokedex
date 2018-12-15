@@ -9,4 +9,5 @@ export * from './pokedex-pokemon-names.interface';
 export * from './pokedex-pokemon-species.interface';
 export * from './pokedex-pokemon-species-evolution-chain.interface';
 export * from './pokedex-pokemon-sprites.interface';
+export * from './pokedex-pokemon-types.interface';
 export * from './pokedex-pokemon-version.interface';

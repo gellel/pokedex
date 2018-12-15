@@ -54,6 +54,13 @@
         </p>
       </section>
       <section>
+        <h5>
+          elements
+        </h5>
+        <pokedex-types
+          [types]="pokemon?.types"></pokedex-types>
+      </section>
+      <section>
         <pokedex-evolutions
           [evolutionChain]="pokemon?.evolutionChain"
           [evolutions]="pokemon?.evolutions"
