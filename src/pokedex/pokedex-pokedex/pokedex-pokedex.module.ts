@@ -6,10 +6,12 @@ import { NgxsModule } from '@ngxs/store';
 import { PokedexPokedexComponent } from './pokedex-pokedex.component';
 import { PokedexCardModule } from './pokedex-card';
 import { PokedexGlyphModule } from './pokedex-glyph';
+import { PokedexTypesComponent } from './pokedex-types/pokedex-types.component';
 
 @NgModule({
   declarations: [
     PokedexPokedexComponent,
+    PokedexTypesComponent,
   ],
   imports: [
     CommonModule,
