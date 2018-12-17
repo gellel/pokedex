@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PokemonOverviewComponent } from './pokemon-overview.component';
+import { PokemonMovesComponent } from './pokemon-moves.component';
 
 @NgModule({
   declarations: [
-    PokemonOverviewComponent
+    PokemonMovesComponent
   ],
   imports: [
     CommonModule
   ],
   exports: [
-    PokemonOverviewComponent
+    PokemonMovesComponent
   ]
 })
-export class PokemonOverviewModule { }
+export class PokemonMovesModule { }

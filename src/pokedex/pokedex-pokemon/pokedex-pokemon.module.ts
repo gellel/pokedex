@@ -7,12 +7,18 @@ import { PokedexPokemonRouteModule } from './pokedex-pokemon.route';
 import { RouterModule } from '@angular/router';
 import { PokedexCardModule } from '@pokedex/pokedex-pokedex/pokedex-card';
 import { PokemonOverviewComponent } from './pokemon-overview/pokemon-overview.component';
+import { PokemonLocationComponent } from './pokemon-location/pokemon-location.component';
+import { PokemonMovesComponent } from './pokemon-moves/pokemon-moves.component';
+import { PokemonStatisticsComponent } from './pokemon-statistics/pokemon-statistics.component';
 
 
 @NgModule({
   declarations: [
     PokedexPokemonComponent,
     PokemonOverviewComponent,
+    PokemonLocationComponent,
+    PokemonMovesComponent,
+    PokemonStatisticsComponent,
   ],
   imports: [
     CommonModule,
