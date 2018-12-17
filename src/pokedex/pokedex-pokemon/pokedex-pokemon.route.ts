@@ -8,8 +8,9 @@ const routes: Routes = [
     children: [
       {
         component: PokemonOverviewComponent,
-        path: 'overview'
-      }
+        path: 'overview',
+        pathMatch: 'full'
+      },
     ],
     component: PokedexPokemonComponent,
     path: ''

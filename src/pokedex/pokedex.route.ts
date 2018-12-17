@@ -5,7 +5,6 @@ const routes: Routes = [
   {
     loadChildren: './pokedex-pokemon/pokedex-pokemon.module#PokedexPokemonModule',
     path: ':id',
-    pathMatch: 'full'
   }
 ];
 
