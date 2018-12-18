@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { PokedexState } from '../pokedex.state';
 import { Observable } from 'rxjs';
-import { PokedexPokemon, PokedexPokemonHttp } from '../pokedex-pokemon';
+import { PokedexPokemon, PokedexPokemonHttp, PokedexPokemonService } from '../pokedex-pokemon';
 import { HttpResponse, HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { PokedexSetTo } from '@pokedex/@/actions';
 
@@ -27,21 +27,13 @@ export class PokedexPokedexComponent implements OnInit {
 
   constructor(
       private http: HttpClient,
-      private store: Store) {};
+      private store: Store,
+      private pokemonService: PokedexPokemonService) {};
   
 
   ngOnInit() {
-    this.pokemon$.subscribe(pokemon$ => pokemon$.forEach(pokemon$ => {
-      if (!pokemon$.$http) {
-        this.http.get(pokemon$.url, {observe: 'response'}).toPromise()
-          .then((HttpResponseBase: HttpResponse<PokedexPokemonHttp>) => {
-            this.onGetPokemonSuccess(HttpResponseBase, pokemon$);
-          })
-          .catch((httpErrorResponse: HttpErrorResponse) => {
-            this.onGetPokemonError(httpErrorResponse, pokemon$);
-          });
-      };
-    }));
+    this.pokemon$.subscribe(pokemon$ => pokemon$.forEach(pokemon$ =>
+      this.pokemonService.attemptPokedexBaseRequest(pokemon$)));
   };
 
   onGetMorePokemon() : void {

@@ -64,8 +64,8 @@ export class PokedexPokemon implements PokedexPokemonHttp {
     this.url = url;
   };
 
-  addPokemonBase(response: HttpResponse<PokedexPokemonHttp>) : void {
-    Object.assign(this, { $http: response }, response.body);
+  addPokemonBase(response: HttpResponse<PokedexPokemonHttp>) : PokedexPokemon {
+    return Object.assign(this, { $http: response }, response.body);
   };
 
   addPokemonFlavorDescriptions(descriptions: Array<PokedexPokemonFlavorText>) : void {

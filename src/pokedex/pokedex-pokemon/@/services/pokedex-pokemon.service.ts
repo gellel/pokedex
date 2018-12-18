@@ -21,10 +21,12 @@ export class PokedexPokemonService {
         .catch((error: HttpErrorResponse) => this.onPokedexBaseReject(error, pokemon)));
   };
 
-  private onPokedexBaseReject(error: HttpErrorResponse, pokemon: PokedexPokemon) : any {};
+  private onPokedexBaseReject(error: HttpErrorResponse, pokemon: PokedexPokemon) : any {
+    return console.error(error);
+  };
 
-  private onPokedexBaseResolve(response: HttpResponse<PokedexPokemonHttp>, pokemon: PokedexPokemon) : any {
-
+  private onPokedexBaseResolve(response: HttpResponse<PokedexPokemonHttp>, pokemon: PokedexPokemon) : PokedexPokemon {
+    return pokemon.addPokemonBase(response);
   };
 
   constructor(
