@@ -32,7 +32,7 @@ export class PokedexPokedexComponent implements OnInit {
 
   ngOnInit() {
     this.pokemon$.subscribe(pokemon$ => pokemon$.forEach(pokemon$ => {
-      if (!pokemon$.http$) {
+      if (!pokemon$.$http) {
         this.http.get(pokemon$.url, {observe: 'response'}).toPromise()
           .then((HttpResponseBase: HttpResponse<PokedexPokemonHttp>) => {
             this.onGetPokemonSuccess(HttpResponseBase, pokemon$);
