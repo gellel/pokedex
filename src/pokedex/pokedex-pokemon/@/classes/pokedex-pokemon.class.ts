@@ -91,9 +91,12 @@ export class PokedexPokemon implements PokedexPokemonHttp {
     this.evolutions[pokemon.name] = pokemon;
   };
 
-  addPokemonEvolutionChain(response: HttpResponse<PokedexPokemonSpeciesEvolutionChain>) : void {
+  addPokemonEvolutionChain(response: HttpResponse<PokedexPokemonSpeciesEvolutionChain>) : PokedexPokemon {
     Object.assign(this.species.evolution_chain, { $http: response }, response.body);
-    console.log('evolutions', this.evolutionChain = this.walkThroughPokemonEvolutionChain(this.species.evolution_chain.chain, []))
+    
+    this.evolutionChain = this.walkThroughPokemonEvolutionChain(this.species.evolution_chain.chain, []);
+
+    return this;
   };
 
   addPokemonNames(names: Array<PokedexPokemonName>) : Observable<any> {
@@ -101,11 +104,13 @@ export class PokedexPokemon implements PokedexPokemonHttp {
       (this.names[name.language.name] = name)));
   };
 
-  addPokemonSpecies(response: HttpResponse<PokedexPokemonSpecies>): void {
+  addPokemonSpecies(response: HttpResponse<PokedexPokemonSpecies>): PokedexPokemon {
     this.species = Object.assign({ $http: response }, response.body);
 
     this.addPokemonNames(this.species.names);
     this.addPokemonFlavorDescriptions(this.species.flavor_text_entries);
+
+    return this;
   };
 
   walkThroughPokemonEvolutionChain(evolution: PokedexPokemonEvolutionChain, sequence: Array<PokedexPokemonEvolutionChain>) : Array<PokedexPokemonEvolutionChain> {

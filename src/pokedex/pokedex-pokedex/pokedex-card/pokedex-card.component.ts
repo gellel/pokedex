@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { PokedexPokemon, PokedexPokemonSpecies, PokedexPokemonName, PokedexPokemonSpeciesEvolutionChain } from '@pokedex/pokedex-pokemon';
+import { PokedexPokemon, PokedexPokemonSpecies, PokedexPokemonName, PokedexPokemonSpeciesEvolutionChain, PokedexPokemonService } from '@pokedex/pokedex-pokemon';
 import { HttpClient, HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Store } from '@ngxs/store';
 import { PokedexState } from '@pokedex/pokedex.state';
@@ -18,43 +18,14 @@ export class PokedexCardComponent implements OnInit {
   @Input()
   public pokemon: PokedexPokemon;
 
-  //public names: PokedexCardNames;
-
-  constructor(private http: HttpClient, private store: Store) { }
+  constructor(private http: HttpClient, private store: Store, private pokemonService: PokedexPokemonService) { }
 
   ngOnInit() {
-    
-    this.attemptPokedexSpeciesRequest().toPromise().then(()=>{
-      this.attemptPokedexEvolutionChainRequest().toPromise().then(()=>{});
-    })
-    
+
+    this.pokemonService.attemptPokedexSpeciesRequest(this.pokemon).toPromise()
+      .then(() => this.pokemonService.attemptPokedexEvolutionChainRequest(this.pokemon));
+
   };
 
-  attemptPokedexSpeciesRequest() : Observable<any> {
-    return of(this.http.get(this.pokemon.species['url'], { observe: 'response' }).toPromise()
-    .then((response: HttpResponse<PokedexPokemonSpecies>) => this.onPokedexSpeciesResolve(response))
-      .catch((error: HttpErrorResponse) => this.onPokedexSpeciesReject(error)));
-  };
 
-  attemptPokedexEvolutionChainRequest() : Observable<any> {
-    return of(this.http.get(this.pokemon.species.evolution_chain.url, { observe: 'response' }).toPromise()
-      .then((response: HttpResponse<PokedexPokemonSpeciesEvolutionChain>) => this.onPokedexEvolutionChainResolve(response))
-        .catch((error: HttpErrorResponse) => this.onPokdexEvolutionChainReject(error)));
-  };
-
-  onPokdexEvolutionChainReject(error: HttpErrorResponse) : void {
-    
-  };
-
-  onPokedexEvolutionChainResolve(response: HttpResponse<PokedexPokemonSpeciesEvolutionChain>) : void {
-    this.pokemon.addPokemonEvolutionChain(response);
-  };
-
-  onPokedexSpeciesReject(error: HttpErrorResponse) : void {
-    console.error(error);
-  };
-
-  onPokedexSpeciesResolve(response: HttpResponse<PokedexPokemonSpecies>) : void {
-    this.pokemon.addPokemonSpecies(response);
-  };
 };

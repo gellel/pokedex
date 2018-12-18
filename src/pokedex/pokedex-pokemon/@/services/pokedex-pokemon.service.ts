@@ -5,14 +5,14 @@ import { Observable, of } from 'rxjs';
 import { PokedexState } from '@pokedex/pokedex.state';
 import { PokedexPokemon } from '../classes';
 import { Pokedex } from '@pokedex/@/classes';
-import { PokedexPokemonHttp } from '../interfaces';
+import { PokedexPokemonHttp, PokedexPokemonSpecies, PokedexPokemonSpeciesEvolutionChain } from '../interfaces';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PokedexPokemonService {
 
-  attemptPokedexBaseRequest(pokemon: PokedexPokemon) : any {
+  attemptPokedexBaseRequest(pokemon: PokedexPokemon) : (PokedexPokemon|any) {
     if (pokemon.$http instanceof Object)
       return of(pokemon);
     
@@ -21,12 +21,43 @@ export class PokedexPokemonService {
         .catch((error: HttpErrorResponse) => this.onPokedexBaseReject(error, pokemon)));
   };
 
+  attemptPokedexSpeciesRequest(pokemon: PokedexPokemon) : (PokedexPokemon|any) {
+    if (pokemon.species.$http instanceof Object)
+      return of(pokemon);
+
+    return (of(this.http.get(pokemon.species.url, { observe: 'response' }).toPromise()
+      .then((response: HttpResponse<PokedexPokemonSpecies>) => this.onPokedexSpeciesResolve(response, pokemon))
+        .catch((error: HttpErrorResponse) => this.onPokedexSpeciesReject(error, pokemon))));
+  };
+
+  attemptPokedexEvolutionChainRequest(pokemon: PokedexPokemon) : (Observable<PokedexPokemon>|any) {
+    return of(this.http.get(pokemon.species.evolution_chain.url, { observe: 'response' }).toPromise()
+      .then((response: HttpResponse<PokedexPokemonSpeciesEvolutionChain>) => this.onPokedexEvolutionChainResolve(response, pokemon))
+        .catch((error: HttpErrorResponse) => this.onPokdexEvolutionChainReject(error, pokemon)));
+  };
+
   private onPokedexBaseReject(error: HttpErrorResponse, pokemon: PokedexPokemon) : any {
     return console.error(error);
   };
 
   private onPokedexBaseResolve(response: HttpResponse<PokedexPokemonHttp>, pokemon: PokedexPokemon) : PokedexPokemon {
     return pokemon.addPokemonBase(response);
+  };
+
+  private onPokdexEvolutionChainReject(error: HttpErrorResponse, pokemon: PokedexPokemon) : void {
+    return console.error(error);
+  };
+
+  private onPokedexEvolutionChainResolve(response: HttpResponse<PokedexPokemonSpeciesEvolutionChain>, pokemon: PokedexPokemon) : PokedexPokemon {
+    return pokemon.addPokemonEvolutionChain(response);
+  };
+
+  private onPokedexSpeciesReject(error: HttpErrorResponse, pokemon: PokedexPokemon) : any {
+    return console.error(error);
+  };
+
+  private onPokedexSpeciesResolve(response: HttpResponse<PokedexPokemonSpecies>, pokemon: PokedexPokemon) : PokedexPokemon {
+    return pokemon.addPokemonSpecies(response);
   };
 
   constructor(
