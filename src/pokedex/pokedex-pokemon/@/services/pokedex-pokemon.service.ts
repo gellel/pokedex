@@ -12,7 +12,7 @@ import { PokedexPokemonHttp, PokedexPokemonSpecies, PokedexPokemonSpeciesEvoluti
 })
 export class PokedexPokemonService {
 
-  attemptPokedexBaseRequest(pokemon: PokedexPokemon) : (PokedexPokemon|any) {
+  attemptPokedexBaseRequest(pokemon: PokedexPokemon) : (Observable<PokedexPokemon>|any) {
     if (pokemon.$http instanceof Object)
       return of(pokemon);
     
@@ -21,7 +21,7 @@ export class PokedexPokemonService {
         .catch((error: HttpErrorResponse) => this.onPokedexBaseReject(error, pokemon)));
   };
 
-  attemptPokedexSpeciesRequest(pokemon: PokedexPokemon) : (PokedexPokemon|any) {
+  attemptPokedexSpeciesRequest(pokemon: PokedexPokemon) : (Observable<PokedexPokemon>|any) {
     if (pokemon.species.$http instanceof Object)
       return of(pokemon);
 
@@ -31,6 +31,9 @@ export class PokedexPokemonService {
   };
 
   attemptPokedexEvolutionChainRequest(pokemon: PokedexPokemon) : (Observable<PokedexPokemon>|any) {
+    if (pokemon.species.evolution_chain.$http instanceof Object)
+      return of(pokemon);
+    
     return of(this.http.get(pokemon.species.evolution_chain.url, { observe: 'response' }).toPromise()
       .then((response: HttpResponse<PokedexPokemonSpeciesEvolutionChain>) => this.onPokedexEvolutionChainResolve(response, pokemon))
         .catch((error: HttpErrorResponse) => this.onPokdexEvolutionChainReject(error, pokemon)));
