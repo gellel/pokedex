@@ -6,8 +6,8 @@ import { PokedexHttpPokemon } from "../interfaces/pokedex-http-pokemon.interface
 export class Pokedex implements PokedexMap {
   [key:string]: PokedexPokemon;
 
-  constructor(pokemon: PokedexHttpPokemon[]) {
+  constructor(pokemon: PokedexHttpPokemon[], pokedexNameMap: PokedexMap) {
     pokemon.forEach((pokemon: PokedexHttpPokemon, i: number, array: Array<PokedexHttpPokemon>) =>
-      this[i+1] = new PokedexPokemon(i+1, pokemon.name, pokemon.url));
+      this[i+1] = new PokedexPokemon(i+1, pokemon.name, pokemon.url, this, pokedexNameMap));
   };
 };

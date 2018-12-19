@@ -59,10 +59,8 @@
           [types]="pokemon?.types"></pokedex-types>
       </section>
       <section>
-        <pokedex-evolutions
-          [evolutionChain]="pokemon?.evolutionChain"
-          [evolutions]="pokemon?.evolutions"
-          [name]="pokemon?.name"></pokedex-evolutions>
+        <pokedex-evolutions *ngIf="pokemon?.species?.$http"
+          [pokemon]="pokemon"></pokedex-evolutions>
       </section>
     </article>
   </div>

@@ -8,6 +8,10 @@ import {
 } from "rxjs";
 
 import {
+  Pokedex
+} from '@pokedex/@/classes';
+
+import {
   PokedexMap
 } from '@pokedex/@/interfaces';
 
@@ -28,6 +32,8 @@ import {
 export class PokedexPokemon implements PokedexPokemonHttp {
 
   public $http: HttpResponse<PokedexPokemonHttp>;
+  public $names: Pokedex;
+  public $pokedex: Pokedex;
   public abilities: object;
   public base_experience: number;
   public descriptions?: PokedexPokemonFlavorDescriptions;
@@ -54,8 +60,12 @@ export class PokedexPokemon implements PokedexPokemonHttp {
   constructor (
       id: number,
       name: string,
-      url: string) {
+      url: string,
+      pokedex: PokedexMap,
+      pokedexNameMap: PokedexMap) {
     
+    this.$names = pokedexNameMap;
+    this.$pokedex = pokedex;
     this.descriptions = {};
     this.evolutions = {};
     this.id = id;

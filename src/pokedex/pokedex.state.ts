@@ -87,7 +87,7 @@ export class PokedexState {
 
     const names: PokedexMap = {};
 
-    const pokedex: Pokedex = new Pokedex(response.results);
+    const pokedex: Pokedex = new Pokedex(response.results, names);
 
     const pokemon: Array<PokedexPokemon> = Object.values(pokedex).map(
       (pokemon: PokedexPokemon) => (names[pokemon.name] = pokemon));

@@ -36,7 +36,7 @@ export class PokedexPokemonService {
         .catch((error: HttpErrorResponse) => this.onPokedexSpeciesReject(error, pokemon))));
   };
 
-  attemptPokedexEvolutionChainRequest(pokemon: PokedexPokemon) : (Observable<PokedexPokemon>|any) {
+  attemptPokedexEvolutionChainRequest(pokemon: PokedexPokemon, pokedex?: Pokedex) : (Observable<PokedexPokemon>|any) {
     if (pokemon.species.evolution_chain.$http instanceof Object)
       return of(pokemon);
     
