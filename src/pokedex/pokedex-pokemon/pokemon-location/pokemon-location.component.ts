@@ -15,5 +15,4 @@ export class PokemonLocationComponent implements OnInit {
 
   ngOnInit() {
   }
-
 }

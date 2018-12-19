@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PokedexPokemon } from '../@';
 import { Store } from '@ngxs/store';
-import { PokedexState } from '@pokedex/pokedex.state';
-import { Pokedex } from '@pokedex/@/classes';
+import { PokedexPokemonState } from '../pokedex-pokemon.state';
 
 @Component({
   selector: 'pokemon-overview',
@@ -16,7 +15,8 @@ export class PokemonOverviewComponent implements OnInit {
   constructor(private store: Store) { }
 
   ngOnInit() {
-    this.store.selectOnce(PokedexState.names$).toPromise().then((pokedex: Pokedex) => console.log(pokedex))
+    this.store.select(PokedexPokemonState).subscribe(
+      (state) => (this.pokemon = state.pokemon));
   }
 
 }

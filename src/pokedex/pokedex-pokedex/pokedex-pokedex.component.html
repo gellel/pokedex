@@ -1,7 +1,5 @@
 <pokedex-glyph *ngFor="let pokemon of pokemon$ | async;"
-  [id]="pokemon.id"
-  [name]="pokemon.name"
-  [sprites]="pokemon.sprites"></pokedex-glyph>
+  [pokemon]="pokemon"></pokedex-glyph>
 
 <button (click)="onGetMorePokemon()">+</button>
 <button routerLink="pokemon">1</button>

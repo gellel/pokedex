@@ -10,6 +10,7 @@ import { PokemonOverviewComponent } from './pokemon-overview/pokemon-overview.co
 import { PokemonLocationComponent } from './pokemon-location/pokemon-location.component';
 import { PokemonMovesComponent } from './pokemon-moves/pokemon-moves.component';
 import { PokemonStatisticsComponent } from './pokemon-statistics/pokemon-statistics.component';
+import { PokedexPokemonState } from './pokedex-pokemon.state';
 
 
 @NgModule({
@@ -24,7 +25,7 @@ import { PokemonStatisticsComponent } from './pokemon-statistics/pokemon-statist
     CommonModule,
     HttpClientModule,
     NgxsModule.forFeature([
-      
+      PokedexPokemonState
     ]),
     PokedexCardModule,
     PokedexPokemonRouteModule,
