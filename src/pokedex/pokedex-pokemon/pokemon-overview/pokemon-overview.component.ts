@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { PokedexPokemon } from '../@';
+import { Store } from '@ngxs/store';
+import { PokedexState } from '@pokedex/pokedex.state';
+import { Pokedex } from '@pokedex/@/classes';
 
 @Component({
   selector: 'pokemon-overview',
@@ -7,9 +11,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PokemonOverviewComponent implements OnInit {
 
-  constructor() { }
+  public pokemon: PokedexPokemon;
+
+  constructor(private store: Store) { }
 
   ngOnInit() {
+    this.store.selectOnce(PokedexState.names$).toPromise().then((pokedex: Pokedex) => console.log(pokedex))
   }
 
 }

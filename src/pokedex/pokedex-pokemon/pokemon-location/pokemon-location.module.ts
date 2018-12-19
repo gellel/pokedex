@@ -1,10 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { PokemonLocationComponent } from './pokemon-location.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    PokemonLocationComponent
+  ],
   imports: [
     CommonModule
+  ],
+  exports: [
+    PokemonLocationComponent
   ]
 })
-export class PokedexLocationModule { }
+export class PokemonLocationModule { }

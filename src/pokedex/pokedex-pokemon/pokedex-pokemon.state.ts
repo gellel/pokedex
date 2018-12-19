@@ -4,14 +4,23 @@ import {
 
 import {
   State,
-  Store
+  Store,
+  Action
 } from '@ngxs/store';
 
-@State<{}>({
+import { 
+  PokedexPokemon,
+  PokedexPokemonStateModel
+} from './@';
+
+@State<PokedexPokemonStateModel>({
   name: 'pokemon'
 })
 export class PokedexPokemonState {
   
+  private storeActivePokemon() {};
+
+  private removeActivePokemon() {};
 
   constructor (private http: HttpClient, private store: Store) {
   };

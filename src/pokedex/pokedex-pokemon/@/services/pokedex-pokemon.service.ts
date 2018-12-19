@@ -21,6 +21,12 @@ export class PokedexPokemonService {
         .catch((error: HttpErrorResponse) => this.onPokedexBaseReject(error, pokemon)));
   };
 
+  attempPokedexLocationRequest(pokemon: PokedexPokemon) : (Observable<PokedexPokemon>|any) {
+    this.http.get(pokemon.location_area_encounters, { observe: 'response' }).toPromise()
+      .then((response) => { console.log(response)})
+        .catch((error: HttpErrorResponse) => {});
+  };
+
   attemptPokedexSpeciesRequest(pokemon: PokedexPokemon) : (Observable<PokedexPokemon>|any) {
     if (pokemon.species.$http instanceof Object)
       return of(pokemon);
