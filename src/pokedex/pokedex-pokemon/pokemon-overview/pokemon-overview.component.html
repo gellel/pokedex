@@ -1,5 +1,5 @@
 <p>
   pokemon-overview works!
 </p>
-<pokemon-location [pokemon]="pokemon"></pokemon-location>
-<pokemon-moves></pokemon-moves>
+<pokemon-location *ngIf="pokemon?.location_area_encounters" [pokemon]="pokemon"></pokemon-location>
+<pokemon-moves *ngIf="pokemon?.moves" [pokemon]="pokemon"></pokemon-moves>

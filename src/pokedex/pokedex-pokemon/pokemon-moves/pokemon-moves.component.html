@@ -1,3 +1,10 @@
 <p>
   pokemon-moves works!
 </p>
+<ul>
+  <li *ngFor="let move of pokemon?.moves">
+    <p>
+      {{ move.move.name }}
+    </p>
+  </li>
+</ul>

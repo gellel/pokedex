@@ -30,7 +30,7 @@ export class PokedexPokemonService {
         .catch((error: HttpErrorResponse) => this.onPokdexEvolutionChainReject(error, pokemon)));
   };
   
-  attempPokedexLocationRequest(pokemon: PokedexPokemon) : (Observable<PokedexPokemon>|any) {
+  attemptPokedexLocationRequest(pokemon: PokedexPokemon) : (Observable<PokedexPokemon>|any) {
     this.http.get(pokemon.location_area_encounters, { observe: 'response' }).toPromise()
       .then((response) => this.onPokedexLocationResolve(response, pokemon))
         .catch((error: HttpErrorResponse) => this.onPokedexLocationReject(error, pokemon));
