@@ -15,9 +15,6 @@ import { PokedexStateModel } from '@pokedex/@/interfaces';
 })
 export class PokedexPokemonComponent implements OnDestroy, OnInit {
 
-  @Select(PokedexState.names$)
-  private names$ : Observable<Pokedex>;
-
   public pokemon: PokedexPokemon;
 
   constructor(private activatedRoute: ActivatedRoute, private store: Store) {}

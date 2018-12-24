@@ -8,10 +8,12 @@ import { PokedexPokemonService, PokedexPokemon } from '../@';
 })
 export class PokemonLocationComponent implements OnInit {
 
+  @Input()
+  public pokemon: PokedexPokemon;
+
 
   constructor(
-    private pokemonService: PokedexPokemonService
-  ) { }
+    private pokemonService: PokedexPokemonService) { }
 
   ngOnInit() {
   }

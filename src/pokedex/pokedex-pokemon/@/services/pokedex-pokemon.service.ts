@@ -45,6 +45,8 @@ export class PokedexPokemonService {
         .catch((error: HttpErrorResponse) => this.onPokdexEvolutionChainReject(error, pokemon)));
   };
 
+  attemptPokedexLocationRequest(pokemon: PokedexPokemon) {}
+
   private onPokedexBaseReject(error: HttpErrorResponse, pokemon: PokedexPokemon) : any {
     return console.error(error);
   };

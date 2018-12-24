@@ -16,7 +16,7 @@ export class PokemonOverviewComponent implements OnInit {
 
   ngOnInit() {
     this.store.select(PokedexPokemonState).subscribe(
-      (state) => (this.pokemon = state.pokemon));
+      (state) => console.log(this.pokemon = state.pokemon));
   }
 
 }
