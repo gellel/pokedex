@@ -21,10 +21,19 @@ export class PokedexPokemonService {
         .catch((error: HttpErrorResponse) => this.onPokedexBaseReject(error, pokemon)));
   };
 
+  attemptPokedexEvolutionChainRequest(pokemon: PokedexPokemon, pokedex?: Pokedex) : (Observable<PokedexPokemon>|any) {
+    if (pokemon.species.evolution_chain.$http instanceof Object)
+      return of(pokemon);
+    
+    return of(this.http.get(pokemon.species.evolution_chain.url, { observe: 'response' }).toPromise()
+      .then((response: HttpResponse<PokedexPokemonSpeciesEvolutionChain>) => this.onPokedexEvolutionChainResolve(response, pokemon))
+        .catch((error: HttpErrorResponse) => this.onPokdexEvolutionChainReject(error, pokemon)));
+  };
+  
   attempPokedexLocationRequest(pokemon: PokedexPokemon) : (Observable<PokedexPokemon>|any) {
     this.http.get(pokemon.location_area_encounters, { observe: 'response' }).toPromise()
-      .then((response) => { console.log(response)})
-        .catch((error: HttpErrorResponse) => {});
+      .then((response) => this.onPokedexLocationResolve(response, pokemon))
+        .catch((error: HttpErrorResponse) => this.onPokedexLocationReject(error, pokemon));
   };
 
   attemptPokedexSpeciesRequest(pokemon: PokedexPokemon) : (Observable<PokedexPokemon>|any) {
@@ -35,17 +44,6 @@ export class PokedexPokemonService {
       .then((response: HttpResponse<PokedexPokemonSpecies>) => this.onPokedexSpeciesResolve(response, pokemon))
         .catch((error: HttpErrorResponse) => this.onPokedexSpeciesReject(error, pokemon))));
   };
-
-  attemptPokedexEvolutionChainRequest(pokemon: PokedexPokemon, pokedex?: Pokedex) : (Observable<PokedexPokemon>|any) {
-    if (pokemon.species.evolution_chain.$http instanceof Object)
-      return of(pokemon);
-    
-    return of(this.http.get(pokemon.species.evolution_chain.url, { observe: 'response' }).toPromise()
-      .then((response: HttpResponse<PokedexPokemonSpeciesEvolutionChain>) => this.onPokedexEvolutionChainResolve(response, pokemon))
-        .catch((error: HttpErrorResponse) => this.onPokdexEvolutionChainReject(error, pokemon)));
-  };
-
-  attemptPokedexLocationRequest(pokemon: PokedexPokemon) {}
 
   private onPokedexBaseReject(error: HttpErrorResponse, pokemon: PokedexPokemon) : any {
     return console.error(error);
@@ -61,6 +59,14 @@ export class PokedexPokemonService {
 
   private onPokedexEvolutionChainResolve(response: HttpResponse<PokedexPokemonSpeciesEvolutionChain>, pokemon: PokedexPokemon) : PokedexPokemon {
     return pokemon.addPokemonEvolutionChain(response);
+  };
+
+  private onPokedexLocationReject(error: HttpErrorResponse, pokemon: PokedexPokemon) : any {
+    return console.error(error);
+  };
+
+  private onPokedexLocationResolve(response: HttpResponse<any>, pokemon: PokedexPokemon) : any {
+    console.log('location', response, pokemon);
   };
 
   private onPokedexSpeciesReject(error: HttpErrorResponse, pokemon: PokedexPokemon) : any {
