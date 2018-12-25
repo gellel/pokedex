@@ -1,3 +1,11 @@
 <p>
   pokemon-statistics works!
 </p>
+<ul>
+  <li *ngFor="let statistic of pokemon.stats">
+    base
+    <p>
+      {{ statistic.base_stat }}
+    </p>
+  </li>
+</ul>

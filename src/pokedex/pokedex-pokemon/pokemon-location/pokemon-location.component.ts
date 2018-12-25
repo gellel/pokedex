@@ -16,6 +16,6 @@ export class PokemonLocationComponent implements OnInit {
     private pokemonService: PokedexPokemonService) { }
 
   ngOnInit() {
-    //this.pokemonService.attemptPokedexLocationRequest(this.pokemon);
+    this.pokemonService.attemptPokedexLocationRequest(this.pokemon);
   }
 }
